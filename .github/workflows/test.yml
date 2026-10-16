@@ -10,28 +10,22 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false  # a failure on one system doesn't cancel the other
       matrix:
         os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
+      # Also checks out this repo and links it in as the tap
+      # zehraduymaz/tap, so the formula tested is the one in this commit.
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@main
-
-      - name: Use this checkout as the tap
-        run: |
-          tap="$(brew --repository)/Library/Taps/zehraduymaz/homebrew-tap"
-          rm -rf "$tap"
-          mkdir -p "$(dirname "$tap")"
-          git clone "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$tap"
-          git -C "$tap" fetch origin "$GITHUB_SHA"
-          git -C "$tap" checkout --detach "$GITHUB_SHA"
 
       - name: Check style
         run: brew audit --strict zehraduymaz/tap/potter
 
       - name: Install from source
-        run: brew install --build-from-source zehraduymaz/tap/potter
+        run: brew install --build-from-source --verbose zehraduymaz/tap/potter
 
       - name: Test
         run: brew test zehraduymaz/tap/potter
