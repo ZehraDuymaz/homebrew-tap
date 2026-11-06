@@ -1,8 +1,8 @@
 class Potter < Formula
   desc "Lightweight terminal Pomodoro timer with tasks, focus history and music"
   homepage "https://github.com/ZehraDuymaz/potter"
-  url "https://github.com/ZehraDuymaz/potter/archive/refs/tags/v0.7.3.tar.gz"
-  sha256 "29302ac5aa94476a66f9485e8e5886032a4c01df7f694441ee1f7ce1b8b7bd45"
+  url "https://github.com/ZehraDuymaz/potter/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "17bf97cfc86ecbcbc075c04909edc921941adedf6651d1a35e0d55d31ef49ddd"
   license "GPL-3.0-or-later"
   head "https://github.com/ZehraDuymaz/potter.git", branch: "main"
 
